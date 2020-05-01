@@ -1,0 +1,143 @@
+### https://docs.opencv.org/3.4.5/d7/d9f/tutorial_linux_install.html
+### Modified
+ 
+# sudo find / -iname opencv.pc -print
+
+cd
+
+sudo apt -y update
+#sudo apt -y upgrade # Don't want pesky CUDA upgrades, too risky
+ 
+# Dependencies
+sudo apt-get -y install build-essential
+sudo apt-get -y install git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get -y install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+sudo apt-get -y install unzip
+
+# Source
+#wget https://github.com/opencv/opencv/archive/4.3.0.zip
+#mv 4.3.0.zip opencv-4.3.0.zip
+#wget https://github.com/opencv/opencv_contrib/archive/4.3.0.zip
+#mv 4.3.0.zip opencv-contrib-4.3.0.zip
+
+# Compile
+rm -rf opencv
+unzip opencv-4.3.0.zip
+mv opencv-4.3.0 opencv
+unzip opencv-contrib-4.3.0.zip
+mv opencv_contrib-4.3.0 opencv/opencv_contrib
+
+cd opencv
+mkdir build
+cd build
+
+echo 00000000000000000000000 CMAKE 00000000000000000000000
+echo 00000000000000000000000 CMAKE 00000000000000000000000
+echo 00000000000000000000000 CMAKE 00000000000000000000000
+echo 00000000000000000000000 CMAKE 00000000000000000000000
+echo 00000000000000000000000 CMAKE 00000000000000000000000
+
+# Only builds for GTX 1080. Use -D CUDA_ARCH_BIN=5.3,6.0,6.1,7.0,7.5 for more compatability.
+
+# Non-conda
+#cmake . -D CMAKE_BUILD_TYPE=RELEASE \
+#            -D CMAKE_INSTALL_PREFIX=/usr/local \
+#            -D PYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3.7 \
+#            -D PYTHON3_EXECUTABLE=/usr/bin/python3.7 \
+#            -D PYTHON_INCLUDE_DIR=/usr/include/python3.7m \
+#            -D PYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python3.7m \
+#            -D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.7m \
+#            -D WITH_TBB=ON \
+#            -D WITH_OPENMP=ON \
+#            -D WITH_IPP=ON \
+#            -D BUILD_EXAMPLES=OFF \
+#            -D BUILD_DOCS=OFF \
+#            -D BUILD_PERF_TESTS=OFF \
+#            -D BUILD_TESTS=OFF \
+#            -D WITH_CSTRIPES=ON \
+#            -D WITH_OPENCL=ON \
+#            -D OPENCV_GENERATE_PKGCONFIG=YES \
+#            -D WITH_CUDA=ON \
+#            -D CUDA_ARCH_BIN=6.1 \
+#            -D CUDA_ARCH_PTX=6.1 \
+#            -D WITH_CUBLAS=ON \
+#            -D CUDA_FAST_MATH=1 \
+#            -D WITH_OPENGL=ON \
+#            -D OPENCV_ENABLE_NONFREE=ON \
+#            -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ..
+
+# Conda
+#cmake . -D CMAKE_BUILD_TYPE=RELEASE \
+#            -D CMAKE_INSTALL_PREFIX=/usr/local \
+#            -D BUILD_opencv_python2=OFF \
+#            -D PYTHON_EXECUTABLE=/anaconda3/bin/python3 \
+#            -D PYTHON_DEFAULT_EXECUTABLE=/anaconda3/bin/python3 \
+#            -D PYTHON3_EXECUTABLE=/anaconda3/bin/python3 \
+#            -D PYTHON_INCLUDE_DIR=/anaconda3/include/python3.7m \
+#            -D PYTHON_INCLUDE_PATH=/anaconda3/include/python3.7m \
+#            -D PYTHON_LIBRARY=/anaconda3/lib/libpython3.7m.so \
+#            -D WITH_TBB=ON \
+#            -D WITH_OPENMP=ON \
+#            -D WITH_IPP=ON \
+#            -D BUILD_EXAMPLES=OFF \
+#            -D BUILD_DOCS=OFF \
+#            -D BUILD_PERF_TESTS=OFF \
+#            -D BUILD_TESTS=OFF \
+#            -D WITH_CSTRIPES=ON \
+#            -D WITH_OPENCL=ON \
+#            -D OPENCV_GENERATE_PKGCONFIG=YES \
+#            -D WITH_CUDA=ON \
+#            -D CUDA_ARCH_BIN=6.1 \
+#            -D CUDA_ARCH_PTX=6.1 \
+#            -D WITH_CUBLAS=ON \
+#            -D CUDA_FAST_MATH=1 \
+#            -D WITH_OPENGL=ON \
+#            -D OPENCV_ENABLE_NONFREE=ON \
+#            -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ..
+
+cmake . -D CMAKE_BUILD_TYPE=RELEASE \
+            -D CMAKE_INSTALL_PREFIX=/usr/local \
+            -D BUILD_opencv_python2=OFF \
+            -D PYTHON_EXECUTABLE=/anaconda3/bin/python3 \
+            -D PYTHON_DEFAULT_EXECUTABLE=/anaconda3/bin/python3 \
+            -D PYTHON3_EXECUTABLE=/anaconda3/bin/python3 \
+            -D PYTHON_INCLUDE_DIR=/anaconda3/include/python3.7m \
+            -D PYTHON_INCLUDE_PATH=/anaconda3/include/python3.7m \
+            -D PYTHON_LIBRARY=/anaconda3/lib/libpython3.7m.so \
+            -D WITH_TBB=ON \
+            -D WITH_OPENMP=ON \
+            -D WITH_IPP=ON \
+            -D BUILD_EXAMPLES=OFF \
+            -D BUILD_DOCS=OFF \
+            -D BUILD_PERF_TESTS=OFF \
+            -D BUILD_TESTS=OFF \
+            -D WITH_CSTRIPES=ON \
+            -D WITH_OPENCL=ON \
+            -D OPENCV_GENERATE_PKGCONFIG=YES \
+            -D WITH_CUDA=ON \
+            -D CUDA_ARCH_BIN=6.1 \
+            -D CUDA_ARCH_PTX=6.1 \
+            -D WITH_CUBLAS=ON \
+            -D CUDA_FAST_MATH=1 \
+            -D WITH_OPENGL=ON \
+            -D OPENCV_ENABLE_NONFREE=ON \
+            -D OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules ..
+
+
+echo 00000000000000000000000 MAKE 00000000000000000000000
+echo 00000000000000000000000 MAKE 00000000000000000000000
+echo 00000000000000000000000 MAKE 00000000000000000000000
+echo 00000000000000000000000 MAKE 00000000000000000000000
+echo 00000000000000000000000 MAKE 00000000000000000000000
+
+make -j4
+
+
+echo 00000000000000000000000 INSTALL 00000000000000000000000
+echo 00000000000000000000000 INSTALL 00000000000000000000000
+echo 00000000000000000000000 INSTALL 00000000000000000000000
+echo 00000000000000000000000 INSTALL 00000000000000000000000
+echo 00000000000000000000000 INSTALL 00000000000000000000000
+# Install
+sudo make install
+sudo ldconfig
