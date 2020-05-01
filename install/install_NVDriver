@@ -1,0 +1,15 @@
+### https://tech.amikelive.com/node-731/how-to-properly-install-nvidia-graphics-driver-on-ubuntu-16-04/
+
+# Assumes pre-install steps have been completed
+
+cd
+
+sudo apt-get purge nvidia-*
+
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+
+sudo apt-get -y install nvidia-418
+
+#sudo reboot

@@ -1,0 +1,21 @@
+### https://cmake.org/download/
+### https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line/865294#865294
+
+cd
+
+sudo apt remove --purge --auto-remove cmake
+
+sudo apt-get install zlib1g
+sudo apt-get install zlib1g-dev
+
+version=3.14
+build=1
+mkdir ~/temp
+cd ~/temp
+wget https://cmake.org/files/v$version/cmake-$version.$build.tar.gz
+tar -xzvf cmake-$version.$build.tar.gz
+cd cmake-$version.$build/
+
+./bootstrap --system-curl
+make -j4
+make install

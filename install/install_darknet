@@ -1,0 +1,16 @@
+### https://github.com/albertsseligmann/darknet
+### Form of https://github.com/AlexeyAB/darknet
+# (Old) Confirmed working with commit: 8c970498a296ed129ffef7d872ccc25d42d1afda
+
+cd
+
+git clone https://github.com/albertsseligmann/darknet.git
+# (Old) git clone https://github.com/AlexeyAB/darknet.git
+
+cd darknet/
+
+# (Old) git checkout 8c970498a296ed129ffef7d872ccc25d42d1afda
+
+# (Old) wget https://pjreddie.com/media/files/yolov3-spp.weights
+# (Old) wget https://pjreddie.com/media/files/yolov3.weights
+# (Old) wget https://pjreddie.com/media/files/yolov3-tiny.weights
