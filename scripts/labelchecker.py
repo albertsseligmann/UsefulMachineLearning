@@ -43,14 +43,8 @@ debug = False
 path = ""
 
 # Handle arguments
-if (
-    any([arg == "-h" for arg in sys.argv])
-    or len(sys.argv) != 2
-    or not os.path.exists(sys.argv[1])
-):
-    print(
-        "\n\nUsage:\n python <filename> <full path>"
-    )
+if (any([arg == "-h" for arg in sys.argv]) or len(sys.argv) != 2 or not os.path.exists(sys.argv[1])):
+    print("\n\nUsage:\n python <filename> <full path>")
     print("Example:\n python src/labelchecker.py train/books/book00000")
     print("\n\n")
     exit()
@@ -66,6 +60,8 @@ classIDColor = {269: (255, 0, 0), 68: (0, 255, 0), 56: (0, 0, 255)}
 # Define where to move "deleted" images
 delete_folder = "delete"
 path_delete = os.path.join(path, delete_folder)
+
+print(path)
 
 # Find content at path
 content = sorted(os.listdir(path))

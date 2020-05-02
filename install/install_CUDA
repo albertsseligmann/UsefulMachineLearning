@@ -1,43 +1,47 @@
 ### https://tech.amikelive.com/node-859/installing-cuda-toolkit-9-2-on-ubuntu-16-04-fresh-install-install-by-removing-older-version-install-and-retain-old-version/
 
-# Assumes NVIDIA Driver 418 is installed, that the GPU is suitable, and pre-install steps have been completed
+# Assumes NVIDIA Driver 440 is installed, that the GPU is suitable, and pre-install steps have been completed
 
 cd
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
+#sudo apt-get -y update
+#sudo apt-get -y upgrade
 
-sudo dpkg -i cuda-repo-ubuntu1604_10.1.105-1_amd64.deb
+#wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 
-sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+#sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 
-sudo apt-get -y update
+#wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 
+#sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+
+sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+sudo apt-get update
 sudo apt-get -y install cuda
 
-export PATH=/usr/local/cuda-10.1/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda-10.2/bin:/usr/local/cuda-10.2/NsightCompute-2019.1${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 echo '# CUDA' >> ~/.profile
-echo 'PATH="/usr/local/cuda-10.1/bin:$HOME/bin:$HOME/.local/bin:$PATH"' >> ~/.profile
-echo 'LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.profile
+echo 'PATH="/usr/local/cuda-10.2/bin:/usr/local/cuda-10.2/NsightCompute-2019.1${PATH:+:${PATH}}"' >> ~/.profile
+echo 'LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.profile
 
-sudo touch ~/lib/systemd/system/nvidia-persistenced
-sudo echo '[Unit]' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'Description=NVIDIA Persistence Daemon' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'Wants=syslog.target' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo '[Service]' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'Type=forking' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'PIDFile=/var/run/nvidia-persistenced/nvidia-persistenced.pid' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'Restart=always' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'ExecStart=/usr/bin/nvidia-persistenced --verbose' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'ExecStopPost=/bin/rm -rf /var/run/nvidia-persistenced' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo '[Install]' >> ~/lib/systemd/system/nvidia-persistenced
-sudo echo 'WantedBy=multi-user.target' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo touch ~/lib/systemd/system/nvidia-persistenced
+#sudo echo '[Unit]' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo 'Description=NVIDIA Persistence Daemon' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo 'Wants=syslog.target' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo '[Service]' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo 'Type=forking' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo 'PIDFile=/var/run/nvidia-persistenced/nvidia-persistenced.pid' >> ~/lib/systemd/system/#nvidia-persistenced
+#sudo echo 'Restart=always' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo 'ExecStart=/usr/bin/nvidia-persistenced --verbose' >> ~/lib/systemd/system/nvidia-#persistenced
+#sudo echo 'ExecStopPost=/bin/rm -rf /var/run/nvidia-persistenced' >> ~/lib/systemd/system/nvidia-#persistenced
+#sudo echo '[Install]' >> ~/lib/systemd/system/nvidia-persistenced
+#sudo echo 'WantedBy=multi-user.target' >> ~/lib/systemd/system/nvidia-persistenced
 
-sudo systemctl enable nvidia-persistenced
+#sudo systemctl enable nvidia-persistenced
 
-sudo cp /lib/udev/rules.d/40-vm-hotadd.rules /etc/udev/rules.d
-sudo sed -i '/SUBSYSTEM=="memory", ACTION=="add"/d' /etc/udev/rules.d/40-vm-hotadd.rules
+#sudo cp /lib/udev/rules.d/40-vm-hotadd.rules /etc/udev/rules.d
+#sudo sed -i '/SUBSYSTEM=="memory", ACTION=="add"/d' /etc/udev/rules.d/40-vm-hotadd.rules
 
 #sudo reboot
